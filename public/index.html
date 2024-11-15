@@ -1,17 +1,36 @@
-<!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
-</html>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Taldau Health</title>
+      <link rel="stylesheet" href="css/main.css">
+      <link rel="icon" type="image/png" href="./images/favicon.ico">
+      <script src="https://unpkg.com/vue@3.4.37"></script>
+
+      <script defer src="/__/firebase/10.13.2/firebase-app-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-auth-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-database-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-firestore-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-functions-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-messaging-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-storage-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-analytics-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-remote-config-compat.js"></script>
+      <script defer src="/__/firebase/10.13.2/firebase-performance-compat.js"></script>
+
+      <script type='text/javascript'>
+        window.smartlook||(function(d) {
+          var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+          var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+          c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+          })(document);
+          smartlook('init', '1857369e89a731f94a8e006b62a3080e11119af7', { region: 'eu' });
+      </script>
+
+    </head>
+    <body>
+      <div id="app"></div>
+    </body>
+  </html>

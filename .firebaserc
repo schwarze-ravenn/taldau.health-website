@@ -1,0 +1,11 @@
+{
+  "projects": {
+    "default": "taldau-health"
+  },
+  "targets": {},
+  "etags": {
+    "taldau-health": {
+      "extensionInstances": {}
+    }
+  }
+}
