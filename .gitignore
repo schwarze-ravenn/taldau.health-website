@@ -1,0 +1,35 @@
+# Ignore sensitive files
+firebaseConfig.js
+.env
+
+# Ignore Firebase configuration and debug logs
+.firebase/
+firebase.json
+firestore-debug.log
+firestore.rules
+firestore.indexes.json
+*.rules.json
+
+# Ignore build and dependency directories
+node_modules/
+dist/
+
+# Ignore local environment files (for secrets)
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local IDE settings
+.idea/
+.vscode/
+
+# GitHub-specific files you don't want public
+.github/
+
+# System files
+.DS_Store
