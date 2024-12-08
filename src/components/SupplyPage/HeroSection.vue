@@ -19,47 +19,107 @@
         <h1 class="title">{{ SupplyName || 'Загрузка...' }}</h1>
         <p class="authors">{{ Authors || 'Автор...' }}</p>
       </header>
-      <p class="description"> {{ formattedDescription || 'Загрузка описания...' }} </p>
+      <p class="description">{{ formattedDescription }}</p>
       <div class="action-buttons">
         <PrimaryButton>Просмотреть библиотеку</PrimaryButton>
         <SecondaryButton>Сохранить</SecondaryButton>
       </div>
     </article>
   </main>
+  <section class="card-container">
+    <ResearchCard
+      v-for="(research, index) in researchData"
+      :key="index"
+      :effect="research.Effect"
+      :research-name="research.ResearchName"
+      :details="research.Details"
+    />
+  </section>
 </template>
 
 <script>
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebaseConfig";
 import PrimaryButton from './PrimaryButton.vue';
 import SecondaryButton from './SecondaryButton.vue';
+import ResearchCard from './ResearchCard.vue';
 
 export default {
   name: 'HeroSection',
   components: {
     PrimaryButton,
     SecondaryButton,
+    ResearchCard
   },
-  props: ['SupplyName', 'Description', 'Category', 'Authors'],  // Принимаем данные как props
+  props: ['SupplyName', 'Description', 'Category', 'Authors'], // Принимаем данные как props
+  data() {
+    return {
+      researchData: [], // Список исследований
+      selectedIndex: 0,  // Индекс выбранного элемента
+    };
+  },
   mounted() {
-    console.log("Props received in HeroSection on mount:", {
-      SupplyName: this.SupplyName,
-      Description: this.Description,
-      Category: this.Category,
-      Authors: this.Authors,
-    });
+    this.fetchResearchData(); // Загружаем данные при первом монтировании
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  },
+  methods: {
+    async fetchResearchData() {
+      try {
+        if (!this.SupplyName) return;
+
+        const docRef = doc(db, 'supplies', 'research');
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const index = this.getSupplyIndex(this.SupplyName);
+
+          if (index !== -1) {
+            this.researchData = [
+              {
+                Effect: data.effect[index],
+                ResearchName: data.research_name[index],
+                Details: data.details[index],
+              },
+            ];
+          } else {
+            console.error(`No data found for ${this.SupplyName}`);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching research data:", error);
+      }
+    },
+    getSupplyIndex(supplyName) {
+      const map = {
+        'Берберин': 0,
+        'Витамин D': 1,
+        'Витамин C': 2,
+      };
+      return map[supplyName] ?? -1;
+    },
+    handleKeyDown(event) {
+      if (event.key === 'ArrowDown') {
+        this.selectedIndex = (this.selectedIndex + 1) % this.researchData.length;
+      } else if (event.key === 'ArrowUp') {
+        this.selectedIndex = (this.selectedIndex - 1 + this.researchData.length) % this.researchData.length;
+      }
+      this.updateSelectedItem();
+    },
+    updateSelectedItem() {
+      const selectedItem = this.researchData[this.selectedIndex];
+      this.$emit('select', selectedItem);
+    },
   },
   watch: {
-    // Наблюдаем за каждым prop, чтобы видеть изменения после монтирования
-    SupplyName(newVal) {
-      console.log("SupplyName prop updated:", newVal);
-    },
-    Description(newVal) {
-      console.log("Description prop updated:", newVal);
-    },
-    Category(newVal) {
-      console.log("Category prop updated:", newVal);
-    },
-    Authors(newVal) {
-      console.log("Authors prop updated:", newVal);
+    SupplyName: {
+      immediate: true, // Выполнить обработчик сразу после монтирования
+      handler() {
+        this.fetchResearchData(); // Обновляем данные при изменении SupplyName
+      },
     },
   },
   computed: {
@@ -67,7 +127,7 @@ export default {
       return this.SupplyName && this.Description
         ? `${this.SupplyName} - ${this.Description}`
         : 'Загрузка описания...';
-    }
+    },
   },
 };
 </script>
@@ -157,6 +217,14 @@ export default {
 .action-buttons {
   display: flex;
   gap: 10px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 30px; 
+  justify-content: center;
+  padding: 120px 0;
 }
 
 @media (max-width: 991px) {

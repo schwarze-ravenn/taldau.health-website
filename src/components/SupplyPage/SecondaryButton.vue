@@ -19,7 +19,6 @@
 
 <script>
 import { ref, computed, onMounted } from 'vue';
-// import saveIcon from '@/images/save.svg';
 
 export default {
   name: 'SecondaryButton',
@@ -27,8 +26,7 @@ export default {
     const isClicked = ref(false);
     const initialText = ref('');
     const initialIconSrc = 'https://cdn.builder.io/api/v1/image/assets/TEMP/57f6d2be1cc46019533833e2afb1a7902d98cb9c3bf5af271e3b3d91d3e887d9?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e';
-    const clickedIconSrc = '@/images/save.svg';
-    // const clickedIconSrc = saveIcon;
+    const clickedIconSrc = require ('@/images/save.svg');
 
     const buttonText = computed(() => isClicked.value ? 'Удалить' : initialText.value);
     const iconSrc = computed(() => isClicked.value ? clickedIconSrc : initialIconSrc);

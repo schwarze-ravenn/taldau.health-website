@@ -32,7 +32,7 @@
         </button>
       </div>
     </nav>
-    <NavBarDropDown :isDropdownVisible="isDropdownVisible" @mouseenter="keepDropdownVisible" @mouseleave="hideDropdown" />
+    <NavBarDropDown :isDropdownVisible="isDropdownVisible" @mouseenter="keepDropdownVisible" @mouseleave="hideDropdown" @closeDropdown="closeDropdown" />
   </header>
 </template>
 

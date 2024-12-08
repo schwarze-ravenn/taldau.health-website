@@ -9,19 +9,26 @@
         placeholder="Берберин, Vitamin D, тревожность, потеря веса"
         v-model="searchQuery"
         @input="handleInput"
+        @keydown.down="moveSuggestion('down')"
+        @keydown.up="moveSuggestion('up')"
+        @keydown.enter="selectActiveSuggestion"
       />
       <div v-if="suggestions.length && showSuggestions" class="search-suggestions">
         <div
-          v-for="suggestion in suggestions"
+          v-for="(suggestion, index) in suggestions"
           :key="suggestion.id"
           class="suggestion-item"
           @click="selectSuggestion(suggestion)"
+          :class="{ 'active-suggestion': activeSuggestionIndex === index }"
         >
           <div class="suggestion-inner">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a1653366f60555da5cc7ebb00b55dc4790866345e547aa16912c95a6b51e72e?placeholderIfAbsent=true&apiKey=4a57dd5c21ba48329ec763aa664f8c8e" alt="" class="suggestion-icon" />
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a1653366f60555da5cc7ebb00b55dc4790866345e547aa16912c95a6b51e72e?placeholderIfAbsent=true&apiKey=4a57dd5c21ba48329ec763aa664f8c8e"
+              alt=""
+              class="suggestion-icon"
+            />
             <span>{{ suggestion.supply_name }}</span>
           </div>
-
         </div>
       </div>
     </form>
@@ -40,6 +47,7 @@ export default {
     const searchQuery = ref('');
     const suggestions = ref([]);
     const showSuggestions = ref(false);
+    const activeSuggestionIndex = ref(-1); // Индекс активного предложения
     const router = useRouter();
 
     const handleInput = async () => {
@@ -60,12 +68,7 @@ export default {
               supply_name: name,
             }));
 
-          // showSuggestions.value = true;
           showSuggestions.value = suggestions.value.length > 0;
-
-      // if (suggestions.value.length === 1) {
-      //   selectSuggestion(suggestions.value[0]);
-      // }
         }
       } else {
         suggestions.value = [];
@@ -73,7 +76,34 @@ export default {
       }
     };
 
+    const moveSuggestion = (direction) => {
+      if (suggestions.value.length === 0) return;
+
+      if (direction === 'down') {
+        activeSuggestionIndex.value = (activeSuggestionIndex.value + 1) % suggestions.value.length;
+      } else if (direction === 'up') {
+        activeSuggestionIndex.value =
+          (activeSuggestionIndex.value - 1 + suggestions.value.length) % suggestions.value.length;
+      }
+
+      console.log("Active suggestion index:", activeSuggestionIndex.value); // Лог для отладки
+    };
+
+    const selectActiveSuggestion = () => {
+      if (activeSuggestionIndex.value >= 0 && activeSuggestionIndex.value < suggestions.value.length) {
+        console.log(
+          "Selected suggestion via keyboard:",
+          suggestions.value[activeSuggestionIndex.value]
+        ); // Лог для отладки
+        selectSuggestion(suggestions.value[activeSuggestionIndex.value]);
+      }
+    };
+
     const selectSuggestion = async (suggestion) => {
+      if (!suggestion) return; // Предохранитель
+
+      console.log("Final selected suggestion:", suggestion); // Лог для отладки
+
       const docRef = doc(db, 'supplies', 'RvClZ5IpL6EtFktxypBY');
       const docSnap = await getDoc(docRef);
 
@@ -81,74 +111,45 @@ export default {
         const data = docSnap.data();
         const index = data.supply_name.findIndex((name) => name === suggestion.supply_name);
 
-        console.log("Extracted data:", data);
-        console.log("Selected index:", index);
+        if (index !== -1) {
+          const selectedData = {
+            SupplyName: data.supply_name[index],
+            Description: data.description[index],
+            Category: data.category[index],
+            Authors: data.authors[index],
+          };
 
-        const selectedData = {
-          SupplyName: data.supply_name[index],
-          Description: data.description[index],
-          Category: data.category[index],
-          Authors: data.authors[index],
-        };
+          console.log("Navigating to:", selectedData); // Лог для отладки
 
-        console.log("Selected Data for Route Params:", selectedData);
-
-        router.push({
-          name: 'Supply',
-          query: {
-          SupplyName: selectedData.SupplyName,
-          Description: selectedData.Description,
-          Category: selectedData.Category,
-          Authors: selectedData.Authors,
-          },
-        });
+          router.push({
+            name: 'Supply',
+            query: {
+              SupplyName: selectedData.SupplyName,
+              Description: selectedData.Description,
+              Category: selectedData.Category,
+              Authors: selectedData.Authors,
+            },
+          });
+        } else {
+          console.error("Selected suggestion not found in database!");
+        }
       } else {
         console.error("Document does not exist!");
       }
 
+      // Скрыть подсказки
       showSuggestions.value = false;
     };
-    
+
     const handleSubmit = async () => {
-      if (suggestions.value.length > 0) {
-        // Если есть предложения, выбираем первое из них
+      if (activeSuggestionIndex.value >= 0) {
+        console.log("Submitting active suggestion:", activeSuggestionIndex.value); // Лог
+        selectActiveSuggestion();
+      } else if (suggestions.value.length > 0) {
+        console.log("Submitting first suggestion by default.");
         selectSuggestion(suggestions.value[0]);
       } else {
-        // Если предложений нет, выполняем поиск по базе
-        const docRef = doc(db, 'supplies', 'RvClZ5IpL6EtFktxypBY');
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          const supplyNames = data.supply_name;
-
-          const matchedIndex = supplyNames.findIndex((name) =>
-            name.toLowerCase().includes(searchQuery.value.toLowerCase())
-          );
-
-          if (matchedIndex !== -1) {
-            const selectedData = {
-              SupplyName: data.supply_name[matchedIndex],
-              Description: data.description[matchedIndex],
-              Category: data.category[matchedIndex],
-              Authors: data.authors[matchedIndex],
-            };
-
-            router.push({
-              name: 'Supply',
-              query: {
-                SupplyName: selectedData.SupplyName,
-                Description: selectedData.Description,
-                Category: selectedData.Category,
-                Authors: selectedData.Authors,
-              },
-            });
-          } else {
-            console.error("No match for query!");
-          }
-        } else {
-          console.error("Document doesn't exist!");
-        }
+        console.error("No suggestions available to submit!");
       }
 
       showSuggestions.value = false;
@@ -158,12 +159,14 @@ export default {
       searchQuery,
       suggestions,
       showSuggestions,
+      activeSuggestionIndex,
       handleInput,
+      moveSuggestion,
       selectSuggestion,
-      handleSubmit
+      selectActiveSuggestion,
+      handleSubmit,
     };
   },
-  
 };
 </script>
 
@@ -212,7 +215,8 @@ export default {
   transition: background-color 0.2s;
 }
 
-.suggestion-item:hover {
+.suggestion-item:hover,
+.active-suggestion {
   background-color: #f0f0f0;
 }
 

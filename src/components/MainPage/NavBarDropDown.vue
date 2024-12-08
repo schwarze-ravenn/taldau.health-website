@@ -5,48 +5,112 @@
         <div class="h-1-columns">
           <div class="популярные">Популярные</div>
           <div class="column-items">
-            <div class="item" @click="fetchAndNavigate('Витамин D')">Витамин D</div>
-            <div class="item">Омега 3</div>
-            <div class="item">Магний</div>
-            <div class="item" @click="fetchAndNavigate('Берберин')">Берберин</div>
-            <div class="item">CoQ10</div>
-            <div class="item">Коллаген</div>
-            <div class="item">Железо</div>
-            <div class="item">Просмотреть все</div>
+            <div class="item" @click="fetchAndNavigate('Витамин D')">
+              <p>Витамин D</p>
+            </div>
+            <div class="item">
+              <p>Омега 3</p>
+            </div>
+            <div class="item">
+              <p>Магний</p>
+            </div>
+            <div class="item" @click="fetchAndNavigate('Берберин')">
+              <p>Берберин</p>
+            </div>
+            <div class="item">
+              <p>CoQ10</p>
+            </div>
+            <div class="item">
+              <p>Коллаген</p>
+            </div>
+            <div class="item">
+              <p>Железо</p>
+            </div>
+            <div class="item">
+              <p>Просмотреть все</p>
+            </div>
           </div>
         </div>
         <div class="h-2-columns">
           <div class="все">Все</div>
           <div class="columns">
             <div class="column">
-              <div class="item">Кальций</div>
-              <div class="item">Цинк</div>
-              <div class="item" @click="fetchAndNavigate('Витамин C')">Витамин C</div>
-              <div class="item">Пробиотики</div>
-              <div class="item">Ашваганда</div>
-              <div class="item">Л-карнитин</div>
-              <div class="item">Масло черного тмина</div>
-              <div class="item">Протеин</div>
+              <div class="item">
+                <p>Кальций</p>
+              </div>
+              <div class="item">
+                <p>Цинк</p>
+              </div>
+              <div class="item" @click="fetchAndNavigate('Витамин C')">
+                <p>Витамин C</p>
+              </div>
+              <div class="item">
+                <p>Пробиотики</p>
+              </div>
+              <div class="item">
+                <p>Ашваганда</p>
+              </div>
+              <div class="item">
+                <p>Л-карнитин</p>
+              </div>
+              <div class="item">
+                <p>Масло черного тмина</p>
+              </div>
+              <div class="item">
+                <p>Протеин</p>
+              </div>
             </div>
             <div class="column">
-              <div class="item">Мелатонин</div>
-              <div class="item">Рыбий жир</div>
-              <div class="item">Биотин</div>
-              <div class="item">Глюкозамин</div>
-              <div class="item" @click="fetchAndNavigate('Витамин D')">Витамин D</div>
-              <div class="item">Витамин B</div>
-              <div class="item">Глюкоза</div>
-              <div class="item">Экстракт виноградных косточек</div>
+              <div class="item">
+                <p>Мелатонин</p>
+              </div>
+              <div class="item">
+                <p>Рыбий жир</p>
+              </div>
+              <div class="item">
+                <p>Биотин</p>
+              </div>
+              <div class="item">
+                <p>Глюкозамин</p>
+              </div>
+              <div class="item" @click="fetchAndNavigate('Витамин D')">
+                <p>Витамин D</p>
+              </div>
+              <div class="item">
+                <p>Витамин B</p>
+              </div>
+              <div class="item">
+                <p>Глюкоза</p>
+              </div>
+              <div class="item">
+                <p>Экстракт виноградных косточек</p>
+              </div>
             </div>
             <div class="column">
-              <div class="item">Фолиевая кислота</div>
-              <div class="item">Салициловая кислота</div>
-              <div class="item">BHA кислоты</div>
-              <div class="item">AHA кислоты</div>
-              <div class="item">Эхинацея</div>
-              <div class="item">Родиола розовая</div>
-              <div class="item">Селен</div>
-              <div class="item">Посмотреть все</div>
+              <div class="item">
+                <p>Фолиевая кислота</p>
+              </div>
+              <div class="item">
+                <p>Салициловая кислота</p>
+              </div>
+              <div class="item">
+                <p>BHA кислоты</p>
+              </div>
+              <div class="item">
+                <p>AHA кислоты</p>
+              </div>
+              <div class="item">
+                <p>Эхинацея</p>
+              </div>
+              <div class="item">
+                <p>Родиола розовая</p>
+              </div>
+              <div class="item">
+                <p>Селен</p>
+              </div>
+              <div class="item">
+                <p>Посмотреть все</p>
+              </div>
             </div>
           </div>
         </div>
@@ -68,7 +132,7 @@ export default {
       default: false,
     },
   },
-  setup() {
+  setup(_, { emit }) {
     const router = useRouter();
 
     const fetchAndNavigate = async (supplyName) => {
@@ -104,6 +168,8 @@ export default {
       } else {
         console.error("Document does not exist in Firestore");
       }
+
+      emit('closeDropdown');
     };
 
     return { fetchAndNavigate };
@@ -188,16 +254,21 @@ export default {
 
 .item {
   font: 400 23px Raleway, sans-serif;
-  padding: 6px  5px;
   white-space: nowrap;
-  border-radius: 4px;
   display: inline-block;
   color: rgba(255, 255, 255, 1);
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-.item:hover {
+.item p {
+  display: inline-block; 
+  padding: 6px  5px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease; 
+}
+
+.item p:hover {
   background-color: #5E28CB;
 }
 

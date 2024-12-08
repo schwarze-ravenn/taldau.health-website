@@ -1,8 +1,3 @@
-// const { defineConfig } = require('@vue/cli-service')
-// module.exports = defineConfig({
-//   transpileDependencies: []
-// })
-
 const webpack = require('webpack');
 // const vue = require('eslint-plugin-vue');
 
