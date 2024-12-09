@@ -5,7 +5,9 @@
       :SupplyName="SupplyName" 
       :Description="Description" 
       :Category="Category" 
-      :Authors="Authors" 
+      :Authors="Authors"
+      :What="What"
+      :How="How" 
     />
   <FooterSection/>
   
@@ -24,7 +26,6 @@ export default {
     FooterSection,
   },
   computed: {
-    // Извлекаем параметры из `query`
     SupplyName() {
       return this.$route.query.SupplyName || '';
     },
@@ -37,6 +38,12 @@ export default {
     Authors() {
       return this.$route.query.Authors || '';
     },
+    What() {
+      return this.$route.query.What || '';
+    },
+    How() {
+      return this.$route.query.How || '';
+    }
   },
 };
 </script>

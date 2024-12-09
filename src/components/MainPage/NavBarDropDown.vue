@@ -149,6 +149,8 @@ export default {
             Description: data.description[index],
             Category: data.category[index],
             Authors: data.authors[index],
+            What: data.what[index],
+            How: data.how[index],
           };
 
           console.log("Navigating with data:", selectedData);
@@ -160,6 +162,8 @@ export default {
               Description: selectedData.Description,
               Category: selectedData.Category,
               Authors: selectedData.Authors,
+              What: selectedData.What,
+              How: selectedData.How,
             },
           });
         } else {

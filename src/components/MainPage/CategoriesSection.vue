@@ -34,12 +34,13 @@
         </div>
       </div>
     </div>
+    <a href="../../images/IMG5.png"></a>
   </template>
   
   <script>
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
   import { useRouter } from 'vue-router';
-  
+
   export default {
     name: 'CategoriesSection',
     setup() {
@@ -52,18 +53,19 @@
         { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/63fb6b939e2e9fba80a110ef2c03202b5c21f77ad0cb9d04bded397899938b0b?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Общее здоровье', heading: 'Сон', link: '/sleep' },
         { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/a2a9b23dd09f9a2fff57d3908f1c4f61252c8e308a228b0987be7975de8dc042?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Кето диета', link: '/keto-diet' },
         { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/730be7e85947e1a5eb91710bcbab00d4fce9625ae339ce8ec97ffaf6fe12bf39?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Интервальное голодание', link: '/intermittent-fasting' },
+        { image: require('../../images/IMG5.png'), subheading: 'Лицо', heading: 'Акне', link: '/longevity' },
+        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/348130baaaf764d409f45646a50a1dd24c83d0d07671b649cf310823c1ad21ec?placeholderIfAbsent=true&apiKey=4f983dce57534b4d9de05eb2f8bf9aaf', subheading: 'Общее здоровье', heading: 'Густая кровь', link: '/sleep' },
+        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/484989e774f7465510d39e1e50478cc0e3840284fbf03e627350cdfbe1240b1c?placeholderIfAbsent=true&apiKey=4f983dce57534b4d9de05eb2f8bf9aaf', subheading: 'Лицо', heading: 'Салициловая кислота', link: '/keto-diet' },
+        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/461eb8fbe6ca66e72857df426991dd42bb7beffe7a401f4b61621cf311913f97?placeholderIfAbsent=true&apiKey=4f983dce57534b4d9de05eb2f8bf9aaf', subheading: 'Общее здоровье', heading: 'Морская болезнь и тошнота', link: '/intermittent-fasting' },
+        
         { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/41e00d21b80022facce92f027278a31010f23efe9a00b16aa081e6a515d62890?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Общее здоровье', heading: 'Долголетие', link: '/longevity' },
         { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/63fb6b939e2e9fba80a110ef2c03202b5c21f77ad0cb9d04bded397899938b0b?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Общее здоровье', heading: 'Сон', link: '/sleep' },
         { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/a2a9b23dd09f9a2fff57d3908f1c4f61252c8e308a228b0987be7975de8dc042?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Кето диета', link: '/keto-diet' },
         { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/730be7e85947e1a5eb91710bcbab00d4fce9625ae339ce8ec97ffaf6fe12bf39?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Интервальное голодание', link: '/intermittent-fasting' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/41e00d21b80022facce92f027278a31010f23efe9a00b16aa081e6a515d62890?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Общее здоровье', heading: 'Долголетие', link: '/longevity' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/63fb6b939e2e9fba80a110ef2c03202b5c21f77ad0cb9d04bded397899938b0b?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Общее здоровье', heading: 'Сон', link: '/sleep' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/a2a9b23dd09f9a2fff57d3908f1c4f61252c8e308a228b0987be7975de8dc042?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Кето диета', link: '/keto-diet' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/730be7e85947e1a5eb91710bcbab00d4fce9625ae339ce8ec97ffaf6fe12bf39?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Интервальное голодание', link: '/intermittent-fasting' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/41e00d21b80022facce92f027278a31010f23efe9a00b16aa081e6a515d62890?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Общее здоровье', heading: 'Долголетие', link: '/longevity' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/63fb6b939e2e9fba80a110ef2c03202b5c21f77ad0cb9d04bded397899938b0b?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Общее здоровье', heading: 'Сон', link: '/sleep' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/a2a9b23dd09f9a2fff57d3908f1c4f61252c8e308a228b0987be7975de8dc042?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Кето диета', link: '/keto-diet' },
-        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/730be7e85947e1a5eb91710bcbab00d4fce9625ae339ce8ec97ffaf6fe12bf39?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e', subheading: 'Диета', heading: 'Интервальное голодание', link: '/intermittent-fasting' },
+        { image: require('../../images/IMG5.png'), subheading: 'Лицо', heading: 'Акне', link: '/longevity' },
+        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/348130baaaf764d409f45646a50a1dd24c83d0d07671b649cf310823c1ad21ec?placeholderIfAbsent=true&apiKey=4f983dce57534b4d9de05eb2f8bf9aaf', subheading: 'Общее здоровье', heading: 'Густая кровь', link: '/sleep' },
+        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/484989e774f7465510d39e1e50478cc0e3840284fbf03e627350cdfbe1240b1c?placeholderIfAbsent=true&apiKey=4f983dce57534b4d9de05eb2f8bf9aaf', subheading: 'Лицо', heading: 'Салициловая кислота', link: '/keto-diet' },
+        { image: 'https://cdn.builder.io/api/v1/image/assets/TEMP/461eb8fbe6ca66e72857df426991dd42bb7beffe7a401f4b61621cf311913f97?placeholderIfAbsent=true&apiKey=4f983dce57534b4d9de05eb2f8bf9aaf', subheading: 'Общее здоровье', heading: 'Морская болезнь и тошнота', link: '/intermittent-fasting' },
       ];
   
       const carouselRows = computed(() => {
@@ -284,7 +286,7 @@
     letter-spacing: 0.72px;
     text-transform: uppercase;
     text-align: left;
-    font: 400 18px/27px Montserrat, sans-serif;
+    font: 400 18px/27px Raleway, sans-serif;
   }
   .heading {
     position: relative;
