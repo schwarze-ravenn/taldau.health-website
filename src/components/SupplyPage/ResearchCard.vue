@@ -1,36 +1,3 @@
-<!-- <template>
-  <article class="research-card">
-    <div class="card-tags">
-      <span class="tag">Берберин</span>
-      <span class="tag">Диабет</span>
-      <span class="tag">Метаболизм</span>
-    </div>
-    <div class="card-content">
-      <div class="effect">Отрицательный эффект</div>
-      <div class="name">
-        <h2>Кардиоваскулярное</h2>
-      </div>
-      <div class="details">
-        <p>• Значительное снижение уровня Глюкозы на 10%</p>
-        <p>• Значительное снижение Гемоглобина на 20%</p>
-        <p>• Значительное снижение Холестерина на 25%</p>
-      </div>
-      <hr class="divider" />
-      <div class="overall">
-        <span>4 Исследования</span>
-        <span>1000 Участников</span>
-      </div>
-      <button class="button">Подробнее</button>
-    </div>
-  </article>
-</template>
-
-<script>
-export default {
-  name: "ResearchCard",
-};
-</script> -->
-
 <template>
   <article class="research-card">
     <div class="card-tags">

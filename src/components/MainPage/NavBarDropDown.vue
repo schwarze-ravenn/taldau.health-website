@@ -5,25 +5,22 @@
         <div class="h-1-columns">
           <div class="популярные">Популярные</div>
           <div class="column-items">
-            <div class="item" @click="fetchAndNavigate('Витамин D')">
-              <p>Витамин D</p>
-            </div>
-            <div class="item">
-              <p>Омега 3</p>
-            </div>
-            <div class="item">
-              <p>Магний</p>
-            </div>
             <div class="item" @click="fetchAndNavigate('Берберин')">
               <p>Берберин</p>
             </div>
-            <div class="item">
-              <p>CoQ10</p>
+            <div class="item" @click="fetchAndNavigate('Витамин D')">
+              <p>Витамин D</p>
             </div>
-            <div class="item">
-              <p>Коллаген</p>
+            <div class="item" @click="fetchAndNavigate('Витамин C')">
+              <p>Витамин C</p>
             </div>
-            <div class="item">
+            <div class="item" @click="fetchAndNavigate('Омега 3')">
+              <p>Омега 3</p>
+            </div>
+            <div class="item" @click="fetchAndNavigate('Магний')">
+              <p>Магний</p>
+            </div>
+            <div class="item" @click="fetchAndNavigate('Железо')">
               <p>Железо</p>
             </div>
             <div class="item">
