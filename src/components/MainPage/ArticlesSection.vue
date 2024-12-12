@@ -205,7 +205,6 @@
     line-height: 1.2;
     text-decoration: none;
     margin-top: 20px;
-    /* text-decoration: underline; */
   }
     
   @media (max-width: 991px) {

@@ -83,10 +83,6 @@ export default {
   transition: filter 0.3s ease;
 }
 
-/* .button-icon.inverted {
-  filter: invert(1);
-} */
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;

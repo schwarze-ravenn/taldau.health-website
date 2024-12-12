@@ -22,6 +22,7 @@
       <p class="description">{{ formattedDescription }}</p>
       <div class="action-buttons">
         <PrimaryButton>Просмотреть библиотеку</PrimaryButton>
+        <!-- <PrimaryButton @click="scrollToSection('section4')">Просмотреть библиотеку</PrimaryButton> -->
         <SecondaryButton>Сохранить</SecondaryButton>
       </div>
     </article>
@@ -117,7 +118,7 @@ export default {
     const activeSection = ref('section1');
     const observer = ref(null);
     const sections = ref([]);
-
+  
     const setupIntersectionObserver = () => {
       observer.value = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -172,15 +173,29 @@ export default {
   mounted() {
     this.fetchResearchData();
   },
+  watch: {
+    SupplyName: {
+      immediate: true, 
+      handler(newSupplyName) {
+        if (newSupplyName) {
+          this.fetchResearchData(newSupplyName);
+        }
+      },
+    },
+  },
   methods: {
-    async fetchResearchData() {
+    // async fetchResearchData() {
+    async fetchResearchData(supplyName) {
       try {
         if (!this.SupplyName) return;
         const docRef = doc(db, 'supplies', 'research');
         const docSnap = await getDoc(docRef);
+
         if (docSnap.exists()) {
           const data = docSnap.data();
-          const index = this.getSupplyIndex(this.SupplyName);
+          const index = this.getSupplyIndex(supplyName);
+          // const index = this.getSupplyIndex(this.SupplyName);
+
           if (index !== -1) {
             this.researchData = [{
               Effect: data.effect[index],
@@ -371,7 +386,6 @@ export default {
 .nav-header {
   display: flex;
   width: 98px;
-  /* gap: 10px; */
   font: 400 24px Raleway, sans-serif;
 }
 

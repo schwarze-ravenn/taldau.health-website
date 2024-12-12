@@ -85,9 +85,6 @@
   }
   .content {
     display: flex;
-    /* align-items: center; */
-    /* justify-content: flex-start; */
-    /* flex-wrap: wrap; */
     align-items: flex-start;
     gap: 40px 68px;
     flex-wrap: nowrap;
@@ -98,7 +95,6 @@
     min-width: 240px;
     flex-direction: column;
     justify-content: flex-start;
-    /* width: 814px; */
     white-space: nowrap;
     margin: auto 0;
   }

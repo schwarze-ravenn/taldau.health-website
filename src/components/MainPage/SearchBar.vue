@@ -6,7 +6,7 @@
         type="text"
         id="search-input"
         class="search-input"
-        placeholder="Берберин, Vitamin D, тревожность, потеря веса"
+        placeholder="Берберин, Витамин D, тревожность, потеря веса"
         v-model="searchQuery"
         @input="handleInput"
         @keydown.down="moveSuggestion('down')"
@@ -94,15 +94,15 @@ export default {
         console.log(
           "Selected suggestion via keyboard:",
           suggestions.value[activeSuggestionIndex.value]
-        ); // Лог для отладки
+        ); 
         selectSuggestion(suggestions.value[activeSuggestionIndex.value]);
       }
     };
 
     const selectSuggestion = async (suggestion) => {
-      if (!suggestion) return; // Предохранитель
+      if (!suggestion) return; 
 
-      console.log("Final selected suggestion:", suggestion); // Лог для отладки
+      console.log("Final selected suggestion:", suggestion);
 
       const docRef = doc(db, 'supplies', 'RvClZ5IpL6EtFktxypBY');
       const docSnap = await getDoc(docRef);
@@ -121,7 +121,7 @@ export default {
             How: data.how[index]
           };
 
-          console.log("Navigating to:", selectedData); // Лог для отладки
+          console.log("Navigating to:", selectedData); 
 
           router.push({
             name: 'Supply',
@@ -141,13 +141,12 @@ export default {
         console.error("Document does not exist!");
       }
 
-      // Скрыть подсказки
       showSuggestions.value = false;
     };
 
     const handleSubmit = async () => {
       if (activeSuggestionIndex.value >= 0) {
-        console.log("Submitting active suggestion:", activeSuggestionIndex.value); // Лог
+        console.log("Submitting active suggestion:", activeSuggestionIndex.value);
         selectActiveSuggestion();
       } else if (suggestions.value.length > 0) {
         console.log("Submitting first suggestion by default.");
