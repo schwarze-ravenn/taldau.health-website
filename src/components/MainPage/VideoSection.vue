@@ -4,7 +4,7 @@
         <div class="content">
           <div class="content-text">
             <div class="info-text">
-              <h2 class="section-title">Преимущества Zertteu Pro</h2>
+              <h2 class="section-title">Преимущества Taldau Pro</h2>
               <ul class="feature-list">
                 <li v-for="(feature, index) in features" :key="index" class="feature-item">
                   <img :src="feature.icon" :alt="feature.alt" class="feature-icon" />
@@ -33,11 +33,11 @@
   </template>
   
   <script>
-  import CtaButton from '@/components/MainPage/CtaButton.vue';
+  // import CtaButton from '@/components/MainPage/CtaButton.vue';
   export default {
     name: 'VideoSection',
     components: {
-      CtaButton
+      // CtaButton
     },
     data() {
       return {

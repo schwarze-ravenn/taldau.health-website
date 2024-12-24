@@ -1,26 +1,28 @@
 <template>
-  <article class="research-card">
+  <article :class="['research-card', { expanded: isExpanded }]">
     <div class="card-tags">
       <span class="tag">Берберин</span>
       <span class="tag">Диабет</span>
       <span class="tag">Метаболизм</span>
     </div>
     <div class="card-content">
-      <div class="effect"> {{effect}} эффект</div>
       <div class="name">
         <h2>{{ researchName }}</h2>
       </div>
+      
+      <div class="effect"> {{effect}} эффект</div>
+      
       <div class="details">
-        <p>• {{ details }}</p>
-        <p>• Опредленное снижение опредленного вещества на %</p>
-        <p>• Опредленное снижение опредленного вещества на %</p>
+        <p>- {{ details }}</p>
+        <p>- Опредленное снижение опредленного вещества на %</p>
+        <p>- Опредленное снижение опредленного вещества на %</p>
       </div>
       <hr class="divider" />
       <div class="overall">
         <span>4 Исследования</span>
         <span>1000 Участников</span>
       </div>
-      <button class="button">Подробнее</button>
+      <button class="button" @click="toggleExpand">Подробнее</button>
     </div>
   </article>
 </template>
@@ -42,6 +44,16 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isExpanded: false, // Состояние для управления шириной
+    };
+  },
+  methods: {
+    toggleExpand() {
+      this.isExpanded = !this.isExpanded;
+    },
+  },
 };
 </script>
 
@@ -60,18 +72,22 @@ export default {
   flex-direction: column;
   gap: 90px;
   color: #000000;
-  max-width: 400px;
-  /* margin: 0; */
+  max-width: 460px;
+  transition: max-width 0.3s ease; /* Анимация изменения ширины */
+}
+
+.research-card.expanded {
+  max-width: 1600px; /* Новая ширина при раскрытии */
 }
 
 .card-tags .tag {
-  margin-right: 20px;
+  margin-right: 25px;
+  font-size: 22px;
 }
 
 .card-tags .tag:last-child {
   margin-right: 0;
 }
-
 
 .tag {
   font-size: 18px;
@@ -87,18 +103,17 @@ export default {
 }
 
 .effect {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 150%;
 }
 
 .name h2 {
-  font-size: 28px;
-  line-height: 100%;
+  font-size: 32px;
   margin: 0;
 }
 
 .details p {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 140%;
   margin: 0;
 }

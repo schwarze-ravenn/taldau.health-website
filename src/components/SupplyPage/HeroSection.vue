@@ -21,8 +21,8 @@
       </header>
       <p class="description">{{ formattedDescription }}</p>
       <div class="action-buttons">
-        <PrimaryButton>Просмотреть библиотеку</PrimaryButton>
-        <!-- <PrimaryButton @click="scrollToSection('section4')">Просмотреть библиотеку</PrimaryButton> -->
+        <!-- <PrimaryButton>Просмотреть библиотеку</PrimaryButton> -->
+        <PrimaryButton @click="scrollToSection('section4')">Просмотреть библиотеку</PrimaryButton>
         <SecondaryButton>Сохранить</SecondaryButton>
       </div>
     </article>

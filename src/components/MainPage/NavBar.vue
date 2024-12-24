@@ -20,15 +20,16 @@
         <button class="search-button" aria-label="Search" @mouseenter="showDropdown('search')">
           <img src="@/images/search-nav-icon.svg" alt="" class="search-icon" />
         </button>
-        <button class="pro-button">  
+        <button class="pro-button" @click="goToUserPage">  
           <span class="pro-text">Taldau Pro</span>
           <img src="@/images/plus-nav-icon.png" alt="" class="pro-icon" />
         </button>
         <div class="language-selector" @click="toggleLanguage">
           <span class="language">{{ currentLanguage }}</span>
         </div>
-        <button class="profile-button" aria-label="Profile">
-          <img src="@/images/profile-icon.png" alt="" class="profile-icon" />
+        <button class="profile-button" aria-label="Profile" @click="goToUserPage">
+        <!-- <button class="profile-button" aria-label="Profile"> -->
+          <img src="@/images/profile-icon.png" alt="Profile Icon" class="profile-icon" />
         </button>
       </div>
     </nav>
@@ -38,9 +39,22 @@
 
 <script>
 import NavBarDropDown from './NavBarDropDown.vue';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'NavBar',
+  setup() {
+    const router = useRouter();
+
+    const goToUserPage = () => {
+      // router.push('/user');
+      router.push('*');
+    };
+
+    return {
+      goToUserPage,
+    };
+  },
   components: {
     NavBarDropDown
   },

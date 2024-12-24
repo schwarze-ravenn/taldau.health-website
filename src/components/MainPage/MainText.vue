@@ -39,7 +39,7 @@ export default {
 }
 
 .info-link {
-  color: #594c73;
+  /* color: #594c73; */
   text-decoration: underline;
   font: 400 28px Raleway, sans-serif;
 }

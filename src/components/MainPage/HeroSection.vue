@@ -5,7 +5,7 @@
       <MainText />
       <SearchBar />
       <TagList :tags="tags" @toggle-tag="toggleTag" />
-      <CtaButton />
+      <!-- <CtaButton /> -->
     </main>
   </section>
 </template>
@@ -15,7 +15,7 @@ import NavBar from './NavBar.vue';
 import MainText from './MainText.vue';
 import SearchBar from './SearchBar.vue';
 import TagList from './TagList.vue';
-import CtaButton from './CtaButton.vue';
+// import CtaButton from './CtaButton.vue';
 
 export default {
   name: 'HeroSection',
@@ -24,11 +24,13 @@ export default {
     MainText,
     SearchBar,
     TagList,
-    CtaButton
+    // CtaButton
   },
   data() {
     return {
-      backgroundImage: './images/hero.png',
+      // backgroundImage: './images/heroo.png',
+      // backgroundImage: './images/hero.png',
+      backgroundImage: './images/hero1.png',
       tags: [
         { text: 'Депрессия', active: true },
         { text: 'Бессоница', active: false },

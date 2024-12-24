@@ -9,7 +9,7 @@
               <li><a href="#process">Научный процесс</a></li>
               <li><a href="#team">Наша команда</a></li>
               <li><a href="#publications">Последние публикации</a></li>
-              <li><a href="#zertteu">Zertteu Pro</a></li>
+              <li><a href="#zertteu">Taldau Pro</a></li>
             </ul>
           </section>
           <section class="footer-section">
@@ -33,7 +33,7 @@
         <div class="footer-info">
           <div class="logo">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/11b68b7d64f1c4118bbd124d0721710c8765139c63587b00649c230b04116fb5?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e" alt="Taldau Health Logo" class="logo-image" />
-            <span class="logo-text">Taldau.health</span>
+            <span class="logo-text">Taldau.Health</span>
           </div>
           <div class="social-icons">
             <a href="#" aria-label="Facebook"><img src="https://cdn.builder.io/api/v1/image/assets/TEMP/89a87dfb427958493e7e2802d2111823ef742c570bd4d12e5549ec495e12759d?placeholderIfAbsent=true&apiKey=93dfb7a0c21b42dc904a108a8b74866e" alt="" class="social-icon" /></a>
